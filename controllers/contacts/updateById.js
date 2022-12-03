@@ -6,7 +6,7 @@ const updateById = async (req, res) => {
   const { id } = req.params;
   const result = await contactsOperations.updateById(id, req.body);
   if (!result) {
-    throw createError(404, `Contact with id=${id} not found `);
+    throw createError(404, 'Not found');
   }
   res.json({
     status: 'success',
