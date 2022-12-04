@@ -1,6 +1,6 @@
 const validation = require('./validation');
-const ctrlWrapper = require('./ctrlWrapper');
+const controllerWrapper = require('./controllerWrapper');
 module.exports = {
   validation,
-  ctrlWrapper,
+  controllerWrapper,
 };
