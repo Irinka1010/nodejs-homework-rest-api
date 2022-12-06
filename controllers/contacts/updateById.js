@@ -1,4 +1,4 @@
-const contactsOperations = require('../../models');
+const { contacts: contactsOperations } = require('../../models');
 
 const createError = require('http-errors');
 
