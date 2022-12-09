@@ -1,12 +1,12 @@
 const {
   Contact,
-  joiIdSchema,
-  joiContactSchema,
-  joiFavoriteSchema,
+  idSchemaJoi,
+  addContactSchemaJoi,
+  favoriteSchemaJoi,
 } = require('./contact');
 module.exports = {
   Contact,
-  joiIdSchema,
-  joiContactSchema,
-  joiFavoriteSchema,
+  idSchemaJoi,
+  addContactSchemaJoi,
+  favoriteSchemaJoi,
 };
