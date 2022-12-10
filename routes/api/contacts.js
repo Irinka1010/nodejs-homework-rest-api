@@ -37,6 +37,7 @@ router.put(
 router.patch(
   '/:id/favorite',
   validation(favoriteSchemaJoi),
+  paramsValidation(idSchemaJoi),
   controllerWrapper(controllers.updateStatusContact)
 );
 router.delete(

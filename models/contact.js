@@ -39,7 +39,6 @@ const idSchemaJoi = Joi.object({ id: Joi.string().required() });
 
 const favoriteSchemaJoi = Joi.object({
   favorite: Joi.boolean().required(),
-  id: Joi.string().required(),
 });
 
 const Contact = model('contact', contactSchema);
