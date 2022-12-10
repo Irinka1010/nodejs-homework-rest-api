@@ -9,4 +9,20 @@ const validation = schema => {
     nex();
   };
 };
-module.exports = validation;
+
+const paramsValidation = schema => {
+  return (req, res, next) => {
+    const { error } = schema.validate(req.params);
+    if (error) {
+      error.status = 400;
+      next(error);
+      return;
+    }
+    next();
+  };
+};
+
+module.exports = {
+  paramsValidation,
+  validation,
+};

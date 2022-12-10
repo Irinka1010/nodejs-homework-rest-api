@@ -7,13 +7,17 @@ const {
   addContactSchemaJoi,
   favoriteSchemaJoi,
 } = require('../../models');
-const { validation, controllerWrapper } = require('../../middlewares');
+const {
+  validation,
+  paramsValidation,
+  controllerWrapper,
+} = require('../../middlewares');
 
 router.get('/', controllerWrapper(controllers.listContacts));
 
 router.get(
   '/:id',
-  validation(idSchemaJoi),
+  paramsValidation(idSchemaJoi),
   controllerWrapper(controllers.getContactById)
 );
 
@@ -26,6 +30,7 @@ router.post(
 router.put(
   '/:id',
   validation(addContactSchemaJoi),
+  paramsValidation(idSchemaJoi),
   controllerWrapper(controllers.updateById)
 );
 
@@ -36,7 +41,7 @@ router.patch(
 );
 router.delete(
   '/:id',
-  validation(idSchemaJoi),
+  paramsValidation(idSchemaJoi),
   controllerWrapper(controllers.removeContact)
 );
 
