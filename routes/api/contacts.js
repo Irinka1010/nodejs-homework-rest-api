@@ -10,6 +10,7 @@ const {
 const {
   validation,
   paramsValidation,
+  isValidId,
   controllerWrapper,
 } = require('../../middlewares');
 
@@ -17,6 +18,7 @@ router.get('/', controllerWrapper(controllers.listContacts));
 
 router.get(
   '/:id',
+  isValidId,
   paramsValidation(idSchemaJoi),
   controllerWrapper(controllers.getContactById)
 );
@@ -29,6 +31,7 @@ router.post(
 
 router.put(
   '/:id',
+  isValidId,
   validation(addContactSchemaJoi),
   paramsValidation(idSchemaJoi),
   controllerWrapper(controllers.updateById)
@@ -36,12 +39,14 @@ router.put(
 
 router.patch(
   '/:id/favorite',
+  isValidId,
   validation(favoriteSchemaJoi),
   paramsValidation(idSchemaJoi),
   controllerWrapper(controllers.updateStatusContact)
 );
 router.delete(
   '/:id',
+  isValidId,
   paramsValidation(idSchemaJoi),
   controllerWrapper(controllers.removeContact)
 );

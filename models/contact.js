@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
-
+const { hendleMongooseError } = require('../middlewares');
 const nameRegex = /^[a-zA-Z ]{3,35}$/;
 
 const contactSchema = new Schema(
@@ -25,6 +25,8 @@ const contactSchema = new Schema(
   },
   { versionKey: false, timestamps: true }
 );
+
+contactSchema.post('save', hendleMongooseError);
 
 const addContactSchemaJoi = Joi.object({
   name: Joi.string().pattern(nameRegex).required(),
