@@ -6,15 +6,16 @@ const {
   idSchemaJoi,
   addContactSchemaJoi,
   favoriteSchemaJoi,
-} = require('../../models');
+} = require('../../models/contact');
 const {
   validation,
   paramsValidation,
   isValidId,
   controllerWrapper,
+  auth,
 } = require('../../middlewares');
 
-router.get('/', controllerWrapper(controllers.listContacts));
+router.get('/', auth, controllerWrapper(controllers.listContacts));
 
 router.get(
   '/:id',
@@ -25,6 +26,7 @@ router.get(
 
 router.post(
   '/',
+  auth,
   validation(addContactSchemaJoi),
   controllerWrapper(controllers.addContact)
 );

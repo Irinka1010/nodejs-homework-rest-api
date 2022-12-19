@@ -1,12 +1,7 @@
-const {
-  Contact,
-  idSchemaJoi,
-  addContactSchemaJoi,
-  favoriteSchemaJoi,
-} = require('./contact');
+const { Contact } = require('./contact');
+const { User } = require('./user');
+
 module.exports = {
   Contact,
-  idSchemaJoi,
-  addContactSchemaJoi,
-  favoriteSchemaJoi,
+  User,
 };
