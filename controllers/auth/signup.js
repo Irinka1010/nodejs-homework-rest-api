@@ -1,4 +1,4 @@
-const { User } = require('../../models');
+const { User } = require('../../models/user');
 const createError = require('http-errors');
 const bcrypt = require('bcryptjs');
 const signup = async (req, res) => {
@@ -7,9 +7,10 @@ const signup = async (req, res) => {
   if (user) {
     throw createError(409, 'Email in use');
   }
-  const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-  const result = await User.create({
-    email,
+
+  const hashPassword = await bcrypt.hash(password, 10);
+  const newUser = await User.create({
+    ...req.body,
     password: hashPassword,
   });
   res.status(201).json({
@@ -18,7 +19,7 @@ const signup = async (req, res) => {
     data: {
       user: {
         email,
-        subscription: result.subscription,
+        subscription: newUser.subscription,
       },
     },
   });

@@ -1,4 +1,4 @@
-const { User } = require('../../models');
+const { User } = require('../../models/user');
 const createError = require('http-errors');
 const updateSubscription = async (req, res) => {
   const { id } = req.user;

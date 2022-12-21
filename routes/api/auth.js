@@ -1,19 +1,23 @@
 const express = require('express');
 
-const { validation, controllerWrapper, auth } = require('../../middlewares');
+const {
+  validationBody,
+  controllerWrapper,
+  auth,
+} = require('../../middlewares');
 const { auth: controllers } = require('../../controllers');
-const { joiLoginSchema, joiSignupSchema } = require('../../models/user');
+const { schemas } = require('../../models/user');
 
 const router = express.Router();
 
 router.post(
   '/signup',
-  validation(joiSignupSchema),
+  validationBody(schemas.joiSignupSchema),
   controllerWrapper(controllers.signup)
 );
 router.post(
   '/login',
-  validation(joiLoginSchema),
+  validationBody(schemas.joiLoginSchema),
   controllerWrapper(controllers.login)
 );
 router.get('/current', auth, controllerWrapper(controllers.getCurrent));

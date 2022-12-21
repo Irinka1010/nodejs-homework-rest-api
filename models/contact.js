@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
-const { hendleMongooseError } = require('../middlewares');
+const { handleMongooseError } = require('../middlewares');
 const nameRegex = /^[a-zA-Z ]{3,35}$/;
 
 const contactSchema = new Schema(
@@ -31,7 +31,7 @@ const contactSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-contactSchema.post('save', hendleMongooseError);
+contactSchema.post('save', handleMongooseError);
 
 const addContactSchemaJoi = Joi.object({
   name: Joi.string().pattern(nameRegex).required(),
@@ -42,16 +42,15 @@ const addContactSchemaJoi = Joi.object({
   favorite: Joi.boolean(),
 });
 
-const idSchemaJoi = Joi.object({ id: Joi.string().required() });
-
 const favoriteSchemaJoi = Joi.object({
   favorite: Joi.boolean().required(),
 });
-
+const schemas = {
+  addContactSchemaJoi,
+  favoriteSchemaJoi,
+};
 const Contact = model('contact', contactSchema);
 module.exports = {
   Contact,
-  idSchemaJoi,
-  addContactSchemaJoi,
-  favoriteSchemaJoi,
+  schemas,
 };
