@@ -12,7 +12,12 @@ const {
 
 router.get('/', auth, controllerWrapper(controllers.listContacts));
 
-router.get('/:id', isValidId, controllerWrapper(controllers.getContactById));
+router.get(
+  '/:id',
+  auth,
+  isValidId,
+  controllerWrapper(controllers.getContactById)
+);
 
 router.post(
   '/',
@@ -23,6 +28,7 @@ router.post(
 
 router.put(
   '/:id',
+  auth,
   isValidId,
   validationBody(schemas.addContactSchemaJoi),
   controllerWrapper(controllers.updateById)
@@ -30,10 +36,16 @@ router.put(
 
 router.patch(
   '/:id/favorite',
+  auth,
   isValidId,
   validationBody(schemas.favoriteSchemaJoi),
   controllerWrapper(controllers.updateStatusContact)
 );
-router.delete('/:id', isValidId, controllerWrapper(controllers.removeContact));
+router.delete(
+  '/:id',
+  auth,
+  isValidId,
+  controllerWrapper(controllers.removeContact)
+);
 
 module.exports = router;
