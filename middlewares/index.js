@@ -1,7 +1,12 @@
-const { validation, paramsValidation } = require('./validation');
+const validationBody = require('./validationBody');
 const controllerWrapper = require('./controllerWrapper');
+const handleMongooseError = require('./handleMongooseError');
+const isValidId = require('./isValidId');
+const auth = require('./auth');
 module.exports = {
-  validation,
+  validationBody,
   controllerWrapper,
-  paramsValidation,
+  handleMongooseError,
+  isValidId,
+  auth,
 };
