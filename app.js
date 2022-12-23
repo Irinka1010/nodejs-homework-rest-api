@@ -4,7 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 const authRouter = require('./routes/api/auth');
 const contactsRouter = require('./routes/api/contacts');
-const { auth } = require('./middlewares');
+const { auth, controllerWrapper } = require('./middlewares');
 const app = express();
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use('/api/users', authRouter);
 
-app.use('/api/contacts', auth, contactsRouter);
+app.use('/api/contacts', controllerWrapper(auth), contactsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
