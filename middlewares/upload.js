@@ -8,11 +8,18 @@ const multerConfig = multer.diskStorage({
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
-  limits: {
-    fileSize: 2048,
-  },
 });
 const upload = multer({
   storage: multerConfig,
+  limits: {
+    fileSize: 500000,
+  },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.includes('image')) {
+      cb(null, true);
+      return;
+    }
+    cb(new Error('Wrong format file for avatar!'));
+  },
 });
 module.exports = upload;
