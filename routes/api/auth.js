@@ -4,6 +4,7 @@ const {
   validationBody,
   controllerWrapper,
   auth,
+  upload,
 } = require('../../middlewares');
 const { auth: controllers } = require('../../controllers');
 const { schemas } = require('../../models/user');
@@ -20,7 +21,25 @@ router.post(
   validationBody(schemas.joiLoginSchema),
   controllerWrapper(controllers.login)
 );
-router.get('/current', auth, controllerWrapper(controllers.getCurrent));
-router.get('/logout', auth, controllerWrapper(controllers.logout));
-router.patch('/', auth, controllerWrapper(controllers.updateSubscription));
+router.get(
+  '/current',
+  controllerWrapper(auth),
+  controllerWrapper(controllers.getCurrent)
+);
+router.get(
+  '/logout',
+  controllerWrapper(auth),
+  controllerWrapper(controllers.logout)
+);
+router.patch(
+  '/',
+  controllerWrapper(auth),
+  controllerWrapper(controllers.updateSubscription)
+);
+router.patch(
+  '/avatars',
+  controllerWrapper(auth),
+  upload.single('avatar'),
+  controllerWrapper(controllers.updateAvatar)
+);
 module.exports = router;
