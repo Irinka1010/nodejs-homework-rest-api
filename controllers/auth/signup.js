@@ -10,7 +10,6 @@ const signup = async (req, res) => {
   if (user) {
     throw createError(409, 'Email in use');
   }
-  console.log('Все работает Ура!!');
 
   const verificationToken = v4();
   const avatarURL = gravatar.url(email);
