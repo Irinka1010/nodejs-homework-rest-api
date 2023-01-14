@@ -16,6 +16,16 @@ router.post(
   validationBody(schemas.joiSignupSchema),
   controllerWrapper(controllers.signup)
 );
+
+router.get(
+  '/verify/:verificationToken',
+  controllerWrapper(controllers.verifyEmail)
+);
+router.post(
+  '/verify',
+  validationBody(schemas.verifySchema),
+  controllerWrapper(controllers.resendEmail)
+);
 router.post(
   '/login',
   validationBody(schemas.joiLoginSchema),
