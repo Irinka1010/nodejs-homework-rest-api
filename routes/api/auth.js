@@ -5,12 +5,25 @@ const {
   controllerWrapper,
   auth,
   upload,
+  passport,
 } = require('../../middlewares');
 const { auth: controllers } = require('../../controllers');
 const { schemas } = require('../../models/user');
 
 const router = express.Router();
 
+router.get(
+  '/google',
+  passport.authenticate('google', { scope: ['email', 'profile'] })
+);
+router.get(
+  '/google/callback',
+  passport.authenticate(
+    'google',
+    { session: false },
+    controllerWrapper(controllers.google)
+  )
+);
 router.post(
   '/signup',
   validationBody(schemas.joiSignupSchema),
